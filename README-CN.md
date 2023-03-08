@@ -6,7 +6,7 @@
 
 [English](./README.md) | 简体中文
 
-便捷、简单和易操作的在内网分享分件的玩具。基于Electron 和 TypeScript 构建。对应的前端项目为 [Easy-Share-Web](https://github.com/zkeyoung/Easy-Share-Web) .
+便捷、简单和易操作的在内网分享文件的玩具。基于Electron 和 TypeScript 构建。对应的前端项目为 [Easy-Share-Web](https://github.com/zkeyoung/Easy-Share-Web) .
 
 ## 安装
 
