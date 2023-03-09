@@ -1,5 +1,4 @@
 import express, { Request, Response } from 'express';
-import fs from 'node:fs/promises';
 import File from '../../entity/file';
 import { cache } from '../cache';
 
@@ -10,13 +9,9 @@ router.get('/:fileId', async (req: Request, res: Response) => {
   try {
     const file: File = cache.get(fileId);
     if (!file) return res.sendStatus(404);
-    const fileHandler = await fs.open(file.path, 'r');
-    const readStream = fileHandler.createReadStream();
-    readStream.on('end', () => {
-      fileHandler.close();
-    })
-    res.attachment(file.name);
-    readStream.pipe(res);
+    res.download(file.path, file.name, (err) => {
+      if (err && !res.headersSent) res.json(`${file.name} download failed`);
+    });
   } catch (err) {
     res.json(err.message);
   }
