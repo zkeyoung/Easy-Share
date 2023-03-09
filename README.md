@@ -12,6 +12,15 @@ A convenient, simple and easy-to-use toy for sharing files in an intranet. Built
 
 Download from [GitHub Releases](https://github.com/zkeyoung/Easy-Share/releases) and install it.
 
+## How to use ?
+
+1. Open the Easy Share.
+
+2. Set up the configuration.
+
+3. Select the file you want to share.
+
+4. Send the download link to your brother
 
 ## User Interface
 

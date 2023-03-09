@@ -12,6 +12,16 @@
 
 从 [GitHub Releases](https://github.com/zkeyoung/Easy-Share/releases) 下载安装。
 
+## 把冰箱装进大象分几步 ?
+
+1. 打开 Easy Share
+
+2. 设置好你的配置
+
+3. 选择你要分享的文件
+
+4. 把下载链接发给你的兄弟
+
 
 ## 界面
 
