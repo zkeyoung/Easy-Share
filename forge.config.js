@@ -10,7 +10,6 @@ module.exports = {
       "LICENSE",
       ".gitignore",
       ".vscode",
-      "^/static"
     ],
     icon: 'static/logo'
   },
