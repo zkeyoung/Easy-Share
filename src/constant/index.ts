@@ -1,4 +1,5 @@
 export const APP_NAME = 'Easy Share';
+export const APP_GITHUB_ISSUES = 'https://github.com/zkeyoung/Easy-Share/issues';
 
 export enum Environment {
   DEV = 'development',
