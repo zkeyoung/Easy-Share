@@ -12,7 +12,11 @@ async function postFile(file: File) {
     return { code: 500, msg: msg };
   }
   const path = file.path;
-  await fs.access(path, fs.constants.R_OK);
+  const stats = await fs.stat(path);
+  if (stats.isDirectory()) {
+    const msg = language === Language.enUS ? 'Not currently supporting folders.' : '暂不支持文件夹';
+    return { code: 400, msg: msg };
+  }
   const id = randomString(6);
   cache.set(id, file);
   const download = `http://${host}:${port}/${id}`;
