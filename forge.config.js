@@ -1,6 +1,7 @@
 module.exports = {
   packagerConfig: {
     name: 'Easy Share',
+    executableName: 'Easy Share',
     asar: true,
     ignore: [
       "^/node_modules",
