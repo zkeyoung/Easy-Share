@@ -59,6 +59,7 @@ jobs:
         run: |
           npm i
           npm run build:prod
+          npx electron-forge import
       - name: Install Production Denpency
         run: npm ci --production
         working-directory: ./dist
