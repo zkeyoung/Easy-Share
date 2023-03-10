@@ -22,7 +22,7 @@ jobs:
       - name: Install Dependency And Build
         run: |
           npm i
-          npm build
+          npm run build
           mv dist page
       - name: Upload
         uses: actions/upload-artifact@v3
