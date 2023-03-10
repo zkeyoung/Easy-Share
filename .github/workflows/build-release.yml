@@ -59,7 +59,14 @@ jobs:
         run: |
           npm i
           npm run build:prod
-          npx electron-forge import
+      - name: Copy Json Windows-latest
+        if: matrix.os == 'windows-latest'
+        run:
+          copy package*.json dist
+      - name: Copy Json Unix
+        if: matrix.os != 'windows-latest'
+        run:
+          cp package*.json dist
       - name: Install Production Denpency
         run: npm ci --production
         working-directory: ./dist
