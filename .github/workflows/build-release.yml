@@ -1,0 +1,76 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  page_build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Frontend Repository
+        uses: actions/checkout@v3
+        with:
+          repository: 'zkeyoung/Easy-Share-Web'
+      - name: Install Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+          cache: npm
+      - name: Install Dependency And Build
+        run: |
+          npm i
+          npm build
+          mv dist page
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: page
+          path: page/
+      
+  app_build:
+    needs: page_build
+    name: Build (${{ matrix.os }} - ${{ matrix.arch }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macOS-latest, ubuntu-latest, windows-latest ]
+        arch: [ x64, arm64 ]
+        include:
+        - os: windows-latest
+          arch: ia32
+        - os: ubuntu-latest
+          arch: armv7l
+        exclude:
+        - os: windows-latest
+          arch: arm64
+
+    steps:
+      - name: Checkout app Repository
+        uses: actions/checkout@v3
+      - name: Install Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+          cache: npm
+      - name: Install Dependency And Compile TS
+        run: |
+          npm i
+          npm run build:prod
+      - name: Install Production Denpency
+        run: npm ci --production
+        working-directory: ./dist
+      - name: Download Page
+        uses: actions/download-artifact@v3
+        with:
+          name: page
+          path: page/
+      - name: Make Package
+        run: npm run make
+        working-directory: ./
+      - name: Upload Package
+        uses: actions/upload-artifact@v3
+        with:
+          name: package
+          path: out/make/
