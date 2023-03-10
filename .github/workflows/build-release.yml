@@ -69,7 +69,7 @@ jobs:
           path: page/
       - name: Make Package
         run: npm run make
-        working-directory: ${GITHUB_WORKSPACE}
+        working-directory: ../
       - name: Upload Package
         uses: actions/upload-artifact@v3
         with:
