@@ -46,6 +46,8 @@ jobs:
         exclude:
         - os: windows-latest
           arch: arm64
+        - os: macOS-latest
+          arch: arm64
 
     steps:
       - name: Checkout app Repository
