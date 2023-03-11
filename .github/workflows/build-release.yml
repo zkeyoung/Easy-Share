@@ -87,7 +87,7 @@ jobs:
           files: |
             out/make/**/*.deb
             out/make/**/*.dmg
-            out/make/**/*setup*.exe
+            out/make/**/*.exe
             out/make/**/*.nupkg
             out/make/**/*.rpm
             out/make/**/*.zip
