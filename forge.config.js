@@ -1,3 +1,5 @@
+const { version } = require('./package.json');
+const path = require('node:path');
 module.exports = {
   packagerConfig: {
     name: 'Easy Share',
@@ -18,7 +20,16 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: (arch) => ({
+        name: 'easy-share',
+        authors: 'zkeyoung',
+        exe: 'easy-share.exe',
+        iconUrl:
+          'https://raw.githubusercontent.com/zkeyoung/static/main/Easy-Share/logo.ico',
+        noMsi: true,
+        setupExe: `easy-share-${version}-win32-${arch}-setup.exe`,
+        setupIcon: path.resolve(__dirname, 'static', 'logo.ico'),
+      }),
     },
     {
       name: '@electron-forge/maker-zip',
@@ -26,11 +37,23 @@ module.exports = {
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      platforms: ['linux'],
+      config: {
+        icon: {
+          scalable: path.resolve(__dirname, 'static', 'logo.svg'),
+          mimeType: ['x-scheme-handler/easy-share'],
+        },
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
-      config: {},
+      platforms: ['linux'],
+      config: {
+        icon: {
+          scalable: path.resolve(__dirname, 'static', 'logo.svg'),
+          mimeType: ['x-scheme-handler/easy-share'],
+        },
+      },
     },
   ],
 };
