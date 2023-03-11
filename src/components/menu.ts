@@ -5,7 +5,7 @@ import { cache } from '../lib/cache';
 import { pagePath } from '../lib/path';
 import type Settings from '../entity/settings';
 
-const { language = Language.enUS }: Settings = cache.get(CacheKey.SETTINGS);
+const { language = Language.enUS }: Settings = cache.get(CacheKey.SETTINGS) || {};
 
 const DisplayLabel = {
   [Language.enUS]: {
