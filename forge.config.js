@@ -41,7 +41,6 @@ module.exports = {
       config: {
         icon: {
           scalable: path.resolve(__dirname, 'static', 'logo.svg'),
-          mimeType: ['x-scheme-handler/easy-share'],
         },
       },
     },
@@ -51,7 +50,6 @@ module.exports = {
       config: {
         icon: {
           scalable: path.resolve(__dirname, 'static', 'logo.svg'),
-          mimeType: ['x-scheme-handler/easy-share'],
         },
       },
     },
