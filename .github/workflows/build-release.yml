@@ -77,8 +77,18 @@ jobs:
           path: page/
       - name: Make Package
         run: npm run make
-      - name: Upload Package
-        uses: actions/upload-artifact@v3.1.2
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: package
-          path: out/make/
+          draft: true
+          files: |
+            out/make/**/*.deb
+            out/make/**/*.dmg
+            out/make/**/*setup*.exe
+            out/make/**/*.nupkg
+            out/make/**/*.rpm
+            out/make/**/*.zip
+            out/make/**/RELEASES
