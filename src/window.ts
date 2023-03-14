@@ -1,4 +1,4 @@
-import { BrowserWindow, app } from 'electron';
+import { BrowserWindow } from 'electron';
 import path from 'node:path';
 import { CacheKey } from './constant';
 import { cache } from './lib/cache';
@@ -30,7 +30,6 @@ function createWindow() {
     });
     window.on('closed', () => {
       destoryWindow();
-      app.quit();
     });
     cache.set(CacheKey.MAIN_WINDOW, window);
   });
