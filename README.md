@@ -31,12 +31,9 @@ Download from [GitHub Releases](https://github.com/zkeyoung/Easy-Share/releases)
 
 ## User Interface
 
-![screenshot1.png](https://raw.githubusercontent.com/zkeyoung/static/main/Easy-Share/1.jpg)
+![screenshot1.png](https://raw.githubusercontent.com/zkeyoung/static/main/Easy-Share/use.gif)
 
-![screenshot2.png](https://raw.githubusercontent.com/zkeyoung/static/main/Easy-Share/2.jpg)
-
-![screenshot3.png](https://raw.githubusercontent.com/zkeyoung/static/main/Easy-Share/3.jpg)
-
+<img src="https://raw.githubusercontent.com/zkeyoung/static/main/Easy-Share/notice.jpg" width="420" />
 
 ## License
 
