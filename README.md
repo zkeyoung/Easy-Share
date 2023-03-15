@@ -33,7 +33,7 @@ Download from [GitHub Releases](https://github.com/zkeyoung/Easy-Share/releases)
 
 ![screenshot1.png](https://raw.githubusercontent.com/zkeyoung/static/main/Easy-Share/use.gif)
 
-<img src="https://raw.githubusercontent.com/zkeyoung/static/main/Easy-Share/notice.jpg" width="420" />
+<img src="https://raw.githubusercontent.com/zkeyoung/static/main/Easy-Share/notice.jpg" width="599" />
 
 ## License
 
