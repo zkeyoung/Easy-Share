@@ -35,6 +35,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
   page_build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Frontend Repository
@@ -58,7 +59,7 @@ jobs:
           path: page/
       
   app_build:
-    needs: [test, page_build]
+    needs: page_build
     name: Build (${{ matrix.os }} - ${{ matrix.arch }})
     runs-on: ${{ matrix.os }}
     strategy:
