@@ -1,18 +1,14 @@
-<p align="center"><a href="https://github.com/zkeyoung/Easy-Share"><img width="200" <img src="./static/logo.png" width="256" alt="Easy Share" /></a></p>
-
-<p align="center">
-  <a href="https://github.com/zkeyoung/Easy-Share/releases"><img src="https://img.shields.io/github/release/zkeyoung/Easy-Share" alt="Release version"></a>
-  <a href="https://github.com/zkeyoung/Easy-Share/actions/workflows/build-release.yml"><img src="https://img.shields.io/github/actions/workflow/status/zkeyoung/Easy-Share/build-release.yml?event=push" alt="Build status"></a>
-  <a href="https://github.com/zkeyoung/Easy-Share/blob/master/LICENSE"><img src="https://img.shields.io/github/license/zkeyoung/Easy-Share" alt="License"></a>
- <a href="https://github.com/Microsoft/TypeScript/releases"> <img src="https://img.shields.io/github/languages/top/zkeyoung/Easy-Share" alt="Typescript coverage"></a>
-  <a href="https://github.com/zkeyoung/Easy-Share/issues"><img src="https://img.shields.io/github/issues/zkeyoung/Easy-Share" alt="Issues"></a>
-<a href="https://github.com/zkeyoung/Easy-Share/pulls"><img src="https://img.shields.io/badge/PRs-Welcome-ligreen" alt="Tag version"></a>
-
+## Easy Share
+<p>
+  <a href="https://github.com/zkeyoung/Easy-Share"><img src="./static/logo.png" width="180" alt="Easy Share" /></a>
 </p>
 
-<h2 align="center">Easy Share</h2>
-
 ## 介绍
+<p>
+  <a href="https://github.com/zkeyoung/Easy-Share/actions/workflows/build-release.yml"><img src="https://github.com/zkeyoung/Easy-Share/actions/workflows/build-release.yml/badge.svg" alt="Build status"></a>
+  <a href="https://coveralls.io/github/zkeyoung/Easy-Share"><img src="https://img.shields.io/coverallsCoverage/github/zkeyoung/Easy-Share" alt="coverage"></a>
+  <a href="https://github.com/zkeyoung/Easy-Share/pulls"><img src="https://img.shields.io/badge/PRs-Welcome-ligreen" alt="Tag version"></a>
+</p>
 
 [English](./README.md) | 简体中文
 
