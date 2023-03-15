@@ -8,6 +8,7 @@
   <a href="https://github.com/zkeyoung/Easy-Share/actions/workflows/build-release.yml"><img src="https://github.com/zkeyoung/Easy-Share/actions/workflows/build-release.yml/badge.svg" alt="Build status"></a>
   <a href="https://coveralls.io/github/zkeyoung/Easy-Share"><img src="https://img.shields.io/coverallsCoverage/github/zkeyoung/Easy-Share" alt="coverage"></a>
   <a href="https://github.com/zkeyoung/Easy-Share/pulls"><img src="https://img.shields.io/badge/PRs-Welcome-ligreen" alt="Tag version"></a>
+  <a href="https://github.com/zkeyoung/Easy-Share/releases"><img src="https://img.shields.io/badge/platform-MacOS%20%7C%20Windows%20%7C%20Linux-lightgrey" alt="support platform" /></a>
 </p>
 
 [English](./README.md) | 简体中文
