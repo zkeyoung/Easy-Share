@@ -5,10 +5,8 @@
 
 ## Introduction
 <p>
-  <a href="https://github.com/zkeyoung/Easy-Share/actions/workflows/build-release.yml"><img src="https://img.shields.io/github/actions/workflow/status/zkeyoung/Easy-Share/build-release.yml?event=push" alt="Build status"></a>
-  <a href="https://github.com/zkeyoung/Easy-Share/blob/master/LICENSE"><img src="https://img.shields.io/github/license/zkeyoung/Easy-Share" alt="License"></a>
-  <a href="https://github.com/zkeyoung/Easy-Share/issues"><img src="https://img.shields.io/github/issues-closed/zkeyoung/Easy-Share" alt="Issues"></a>
-  <a href="https://github.com/zkeyoung/Easy-Share/actions/workflows/build-release.yml"><img src="https://img.shields.io/github/downloads/zkeyoung/Easy-Share/total" alt="downloads"></a>
+  <a href="https://github.com/zkeyoung/Easy-Share/actions/workflows/build-release.yml"><img src="https://github.com/zkeyoung/Easy-Share/actions/workflows/build-release.yml/badge.svg" alt="Build status"></a>
+  <a href="https://coveralls.io/github/zkeyoung/Easy-Share"><img src="https://img.shields.io/coverallsCoverage/github/zkeyoung/Easy-Share" alt="coverage"></a>
   <a href="https://github.com/zkeyoung/Easy-Share/pulls"><img src="https://img.shields.io/badge/PRs-Welcome-ligreen" alt="Tag version"></a>
 </p>
 
