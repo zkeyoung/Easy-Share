@@ -9,7 +9,10 @@
     "make": "electron-forge make",
     "prebuild": "tsc --build --clean",
     "build": "tsc",
-    "build:prod": "tsc --sourceMap false --declaration false --incremental false"
+    "build:prod": "tsc --sourceMap false --declaration false --incremental false",
+    "test": "jest",
+    "test:ci": "jest --coverage --runInBand",
+    "test:report": "jest --json --bail=false --outputFile=report.json | true"
   },
   "keywords": [
     "Convenient",
@@ -27,12 +30,14 @@
     "@electron-forge/maker-squirrel": "^6.0.5",
     "@electron-forge/maker-zip": "^6.0.5",
     "@types/express": "^4.17.17",
+    "@types/jest": "^29.4.1",
     "electron": "^23.1.1",
-    "typescript": "^4.9.5",
-    "ts-node": "^10.9.1"
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "express": "^4.18.2"
   }
 }
