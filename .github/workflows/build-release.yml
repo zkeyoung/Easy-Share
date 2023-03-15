@@ -7,6 +7,33 @@ on:
       - '*'
 
 jobs:
+  test:
+    name: Test (${{ matrix.os }} - ${{ matrix.arch }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macOS-latest, ubuntu-latest, windows-latest ]
+        arch: [ x64 ]
+        include:
+          - os: macOS-latest
+            arch: arm64
+    steps:
+      - name: Checkout app Repository
+        uses: actions/checkout@v3
+      - name: Install Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.1
+          cache: npm
+      - name: Install Dependency And Compile TS
+        run: npm i
+      - name: Test
+        run: npm run test:ci
+      - name: Coveralls
+        if: matrix.os == 'macOS-latest'
+        uses: coverallsapp/github-action@v1.2.4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
   page_build:
     runs-on: ubuntu-latest
     steps:
@@ -31,7 +58,7 @@ jobs:
           path: page/
       
   app_build:
-    needs: page_build
+    needs: [test, page_build]
     name: Build (${{ matrix.os }} - ${{ matrix.arch }})
     runs-on: ${{ matrix.os }}
     strategy:
