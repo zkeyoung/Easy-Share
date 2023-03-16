@@ -13,12 +13,23 @@ class FileHandle {
   }
 }
 
+class FileStats {
+  #file;
+  isDirectory = jest.fn(() => {
+    return isDirectory(this.#file);
+  });
+
+  constructor(file) {
+    this.#file = file;
+  }
+}
+
 
 class FSPromise {
 
   #disk;
-
-  fileHandle: FileHandle;
+  #fileHandle: FileHandle;
+  #fileStats: FileStats;
 
   access = jest.fn((path) => {
     if (this.#disk[path]) return Promise.resolve();
@@ -26,22 +37,35 @@ class FSPromise {
   });
   
   mkdir = jest.fn(path => {
-    this.#disk[path] = { type: 'dir' };
+    this.#disk[path] = createDir();
     return Promise.resolve();
   });
 
   open = jest.fn(path => {
-    const fileHandle = this.#disk[path];
-    if (!fileHandle) return Promise.reject(getENOENTError(path));
-    this.fileHandle = fileHandle;
-    return Promise.resolve(new FileHandle(this.#disk));
+    const file = this.#disk[path];
+    if (!file) return Promise.reject(getENOENTError(path));
+    this.#fileHandle = new FileHandle(file);
+    return Promise.resolve(this.#fileHandle);
+  });
+
+  stat = jest.fn(path => {
+    const file = this.#disk[path];
+    if (!file) return Promise.reject(getENOENTError(path));
+    this.#fileStats = new FileStats(file);
+    return Promise.resolve(this.#fileStats);
   });
 
   constructor(disk: {}) {
     this.#disk = disk;
   }
 
-  private 
+  getFileStats() {
+    return this.#fileStats;
+  }
+
+  getFileHandle() {
+    return this.#fileHandle;
+  }
 
 }
 
@@ -56,8 +80,18 @@ function getENOENTError(path) {
   }
 }
 
+function createDir() {
+  return { type: 'dir' }
+}
+
+function isDirectory(file: { type: string }) {
+  return file.type === 'dir';
+}
+
+
 export {
   FSPromise,
   FileHandle,
   getENOENTError,
+  createDir,
 };
