@@ -1,28 +1,27 @@
-import { FSPromise, createDir } from '../mocks/fs-promises';
+import { fsPromises, DISK, createDir } from '../mocks/fs-promises';
+import { SETTINGS } from '../mocks/cache';
 import { server } from '../mocks/server';
-const disk = {};
-const fsPromsie = new FSPromise(disk);
-jest.mock('electron', () => require('../mocks/electron'));
-jest.mock('node:fs/promises', () => fsPromsie);
-jest.mock('../../src/lib/server', () => server);
 import httpServer from '../../src/lib/server';
-
 import fs from 'node:fs/promises';
 import { preTask } from '../../src/lib/prerequisite';
 import { appDataPath, settingsFilePath } from '../../src/lib/path';
-import { CacheKey, Language } from '../../src/constant';
+import { CacheKey } from '../../src/constant';
 import { cache } from '../../src/lib/cache';
+
+jest.mock('node:fs/promises', () => fsPromises);
+jest.mock('../../src/lib/server', () => server);
+jest.mock('electron', () => require('../mocks/electron'));
 
 describe('guaranteePath()', () => {
   it('should mkdir if not exist', async () => {
     await preTask();
     expect(fs.access).toHaveBeenCalled();
     expect(fs.mkdir).toHaveBeenCalled();
-    expect(disk[appDataPath]).toBeTruthy();
+    expect(DISK.get(appDataPath)).toBeTruthy();
   });
 
   it('should not mkdir if exist', async () => {
-    disk[appDataPath] = createDir();
+    DISK.set(appDataPath, createDir);
     await preTask();
     expect(fs.access).toHaveBeenCalled();
     expect(fs.mkdir).not.toHaveBeenCalled();
@@ -30,7 +29,7 @@ describe('guaranteePath()', () => {
 
   it('should throw error', async () => {
     const err = new Error('I am an error');
-    fsPromsie.access.mockRejectedValueOnce(err);
+    fsPromises.access.mockRejectedValueOnce(err);
     try {
       await preTask();
       expect(fs.access).toHaveBeenCalled();
@@ -44,7 +43,7 @@ describe('guaranteePath()', () => {
 describe('readSettings()', () => {
   it('should throw err', async () => {
     const err = new Error('I am an error');
-    fsPromsie.open.mockRejectedValueOnce(err);
+    fsPromises.open.mockRejectedValueOnce(err);
     try {
       await preTask();
       expect(fs.open).toHaveBeenCalled();
@@ -55,8 +54,7 @@ describe('readSettings()', () => {
 
   it('should not start server', async () => {
     server.start.mockResolvedValueOnce(undefined);
-    const settings = { port: 8888, internet: '192.168.1.1', language: Language.enUS };
-    disk[settingsFilePath] = JSON.stringify(settings);
+    DISK.set(settingsFilePath, JSON.stringify(SETTINGS));
     await preTask()
     expect(fs.open).toHaveBeenCalled();
     expect(httpServer.start).toHaveBeenCalled();
@@ -65,12 +63,11 @@ describe('readSettings()', () => {
   });
 
   it('run success', async () => {
-    const settings = { port: 8888, internet: '192.168.1.1', language: Language.enUS };
-    disk[settingsFilePath] = JSON.stringify(settings);
+    DISK.set(settingsFilePath, JSON.stringify(SETTINGS));
     await preTask()
     expect(fs.open).toHaveBeenCalled();
     expect(httpServer.start).toHaveBeenCalled();
-    expect(cache.get(CacheKey.SETTINGS)).toEqual(settings);
+    expect(cache.get(CacheKey.SETTINGS)).toEqual(SETTINGS);
     expect(cache.get(CacheKey.HTTP_SERVER)).toBeTruthy();
   });
 });

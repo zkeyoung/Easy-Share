@@ -69,7 +69,9 @@ export class MenuItemMock {
 }
 
 export class IPCMainMock extends EventEmitter {
-  public handle = jest.fn();
+  public handle = jest.fn((event, callback) => {
+    this.on(event, callback);
+  });
   public handleOnce = jest.fn();
   public removeHandler = jest.fn();
   public send = jest.fn();

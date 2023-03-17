@@ -1,6 +1,7 @@
 import { utils } from '../mocks/utils';
-jest.mock('../../src/lib/utils', () => utils);
 import { getIntranet } from '../../src/ipc/net';
+
+jest.mock('../../src/lib/utils', () => utils);
 
 describe('getIntranet()', () => {
   it('success', async () => {

@@ -1,14 +1,13 @@
-import { FSPromise } from '../mocks/fs-promises';
-const disk = {};
-const fsPromsie = new FSPromise(disk);
-jest.mock('electron', () => require('../mocks/electron'));
-jest.mock('node:fs/promises', () => fsPromsie);
+import { fsPromises, DISK } from '../mocks/fs-promises';
 import { postFile, deleteFile } from '../../src/ipc/file';
 import File from '../../src/entity/file';
 import { settingsFilePath } from '../../src/lib/path';
 import { cache } from '../../src/lib/cache';
 import { CacheKey, Language, } from '../../src/constant';
 import { randomString } from '../../src/lib/utils';
+
+jest.mock('electron', () => require('../mocks/electron'));
+jest.mock('node:fs/promises', () => fsPromises);
 
 const file = new File();
 file.name = 'settings.json';
@@ -36,7 +35,7 @@ describe('postFile()', () => {
   });
 
   it('should return 400', async () => {
-    disk[file.path] = { type: 'dir' };
+    DISK.set(file.path, { type: 'dir' });
     cache.set(CacheKey.HTTP_SERVER, 'exist');
     {
       const { code, msg } = await postFile(file);
@@ -53,7 +52,7 @@ describe('postFile()', () => {
 
   it('should return 200', async () => {
     cache.set(CacheKey.HTTP_SERVER, 'exist');
-    disk[file.path] = { ...file };
+    DISK.set(file.path, { ...file });
     const { code, msg, data } = await postFile(file);
     expect(code).toBe(0);
     expect(msg).toBe('success');

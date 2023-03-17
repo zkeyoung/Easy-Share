@@ -1,3 +1,5 @@
+const DISK = new Map();
+
 class FileHandle {
   #file;
   
@@ -25,37 +27,40 @@ class FileStats {
 }
 
 
-class FSPromise {
+class FSPromises {
 
-  #disk;
+  #disk: typeof DISK;
   #fileHandle: FileHandle;
   #fileStats: FileStats;
 
   access = jest.fn((path) => {
-    if (this.#disk[path]) return Promise.resolve();
+    if (this.#disk.get(path)) return Promise.resolve();
     return Promise.reject(getENOENTError(path))
   });
   
   mkdir = jest.fn(path => {
-    this.#disk[path] = createDir();
-    return Promise.resolve();
+    return Promise.resolve(this.#disk.set(path, createDir()));
   });
 
   open = jest.fn(path => {
-    const file = this.#disk[path];
+    const file = this.#disk.get(path);
     if (!file) return Promise.reject(getENOENTError(path));
     this.#fileHandle = new FileHandle(file);
     return Promise.resolve(this.#fileHandle);
   });
 
   stat = jest.fn(path => {
-    const file = this.#disk[path];
+    const file = this.#disk.get(path);
     if (!file) return Promise.reject(getENOENTError(path));
     this.#fileStats = new FileStats(file);
     return Promise.resolve(this.#fileStats);
   });
 
-  constructor(disk: {}) {
+  writeFile = jest.fn((path, data: string) => {
+    return Promise.resolve(this.#disk.set(path, data));
+  });
+
+  constructor(disk: typeof DISK) {
     this.#disk = disk;
   }
 
@@ -88,9 +93,11 @@ function isDirectory(file: { type: string }) {
   return file.type === 'dir';
 }
 
+const fsPromises = new FSPromises(DISK);
 
 export {
-  FSPromise,
+  fsPromises,
+  DISK,
   FileHandle,
   getENOENTError,
   createDir,

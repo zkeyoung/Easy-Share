@@ -1,6 +1,7 @@
 import { networkInterfaces, os } from '../mocks/os';
-jest.mock('node:os', () => os);
 import { randomString, getServerAddress } from '../../src/lib/utils';
+
+jest.mock('node:os', () => os);
 
 describe('randomString()', () => {
 
