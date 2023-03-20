@@ -11,6 +11,21 @@ import * as netModule from '../../src/ipc/net';
 import * as setttingsModule from '../../src/ipc/setttings';
 import * as windowModule from '../../src/ipc/window';
 
+/* [
+  '../../src/ipc/file',
+  '../../src/ipc/net',
+  '../../src/ipc/setttings',
+  '../../src/ipc/window',
+].forEach(path => {
+  jest.mock(path, () => {
+    const mod = jest.requireActual(path);
+    return Object.keys(mod).reduce((o, k) => {
+      o[k] = jest.fn();
+      return o;
+    }, {});
+  });
+}); */
+
 jest.mock('../../src/ipc/file', () => {
   const mod = jest.requireActual('../../src/ipc/file');
   return Object.keys(mod).reduce((o, k) => {

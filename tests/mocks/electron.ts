@@ -29,7 +29,10 @@ export class MenuMock {
   public static readonly setApplicationMenu = jest.fn();
   public static readonly sendActionToFirstResponder = jest.fn();
   public static readonly getApplicationMenu = jest.fn();
-  public static readonly buildFromTemplate = jest.fn();
+  public static readonly buildFromTemplate = jest.fn((menuItems) => {
+    MenuMock.MenuItems = menuItems;
+  });
+  public static MenuItems: MenuItemMock[] = [];
   public readonly popup = jest.fn();
   public readonly closePopup = jest.fn();
   public items: Array<MenuItemMock> = [];
@@ -53,6 +56,7 @@ export class MenuItemMock {
   public visible: boolean;
   public label: string;
   public type: string;
+  public submenu: MenuItemMock[];
   public click: (
     menuItem: Electron.MenuItem,
     browserWindow: Electron.BrowserWindow | undefined,
