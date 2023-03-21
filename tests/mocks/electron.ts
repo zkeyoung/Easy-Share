@@ -8,7 +8,7 @@ const createdNotifications: Array<NotificationMock> = [];
 export class NotificationMock extends EventEmitter {
   public readonly show = jest.fn();
 
-  public static isSupported = jest.fn();
+  public static isSupported = jest.fn(() => true);
 
   constructor(public readonly options: any) {
     super();
