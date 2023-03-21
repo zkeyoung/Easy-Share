@@ -5,8 +5,10 @@ import { WebContentsMock } from './web-contents';
 
 const createdNotifications: Array<NotificationMock> = [];
 
-class NotificationMock extends EventEmitter {
+export class NotificationMock extends EventEmitter {
   public readonly show = jest.fn();
+
+  public static isSupported = jest.fn();
 
   constructor(public readonly options: any) {
     super();
