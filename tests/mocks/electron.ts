@@ -105,6 +105,7 @@ const app = {
   addRecentDocument: jest.fn(),
   getName: jest.fn().mockReturnValue('Electron Fiddle'),
   setName: jest.fn(),
+  setAppUserModelId: jest.fn(),
   exit: jest.fn(),
   hide: jest.fn(),
   show: jest.fn(),
