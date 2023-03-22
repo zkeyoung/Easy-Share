@@ -33,7 +33,6 @@ app.on('window-all-closed', () => {
 app.on('before-quit', () => {
   const server: Server = cache.get(CacheKey.HTTP_SERVER);
   if (server) {
-    server.close()
-    cache.delete(CacheKey.HTTP_SERVER);
+    server.close();
   }
 });

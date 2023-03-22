@@ -12,6 +12,7 @@ export class NotificationMock extends EventEmitter {
 
   constructor(public readonly options: any) {
     super();
+    this.options = options;
     createdNotifications.push(this);
   }
 }
@@ -103,6 +104,7 @@ function CreateWindowStub() {
 const app = {
   addRecentDocument: jest.fn(),
   getName: jest.fn().mockReturnValue('Electron Fiddle'),
+  setName: jest.fn(),
   exit: jest.fn(),
   hide: jest.fn(),
   show: jest.fn(),

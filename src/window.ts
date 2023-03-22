@@ -4,11 +4,8 @@ import { CacheKey } from './constant';
 import { cache } from './lib/cache';
 import { pagePath } from './lib/path';
 
-function createWindow() {
+function createWindow(): Promise<BrowserWindow> {
   return new Promise((resolve) => {
-    const cachedWindow = getWindow();
-    if (cachedWindow) return resolve(cachedWindow);
-
     const bwOption: Electron.BrowserWindowConstructorOptions = {
       height: 300,
       width: 280,
@@ -24,7 +21,6 @@ function createWindow() {
     }
     const window = new BrowserWindow(bwOption);
     window.loadFile(pagePath, { hash: cache.get(CacheKey.SETTINGS) ? '' : '#/settings' });
-    // window.loadURL('http://localhost:5173/');
     window.once('ready-to-show', () => {
       resolve(window);
       window.show();
@@ -36,16 +32,13 @@ function createWindow() {
   });
 }
 
-function getWindow(): BrowserWindow {
+function getWindow(): BrowserWindow | undefined {
   return cache.get(CacheKey.MAIN_WINDOW);
 }
 
 function destoryWindow() {
   const window = getWindow();
   if (window) {
-    if (!window.isDestroyed()) {
-      window.destroy();
-    }
     cache.delete(CacheKey.MAIN_WINDOW);
   }
   for (const key of cache.keys()) {
@@ -53,16 +46,18 @@ function destoryWindow() {
   }
 }
 
-function showWindow() {
+async function showWindow() {
   if (BrowserWindow.getAllWindows().length === 0) {
-    return createWindow();
+    await createWindow();
   }
   const window = getWindow();
-  if (window.isMinimized()) {
-    return window.restore();
-  }
-  if (!window.isFocused()) {
-    return window.focus()
+  if (window) {
+    if (window.isMinimized()) {
+      window.restore();
+    }
+    if (!window.isFocused()) {
+      window.focus();
+    }
   }
 }
 
