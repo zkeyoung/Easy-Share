@@ -1,3 +1,4 @@
+Object.defineProperty(process, 'platform', { value: 'darwin' });
 jest.mock('electron', () => require('./mocks/electron'));
 
 const showWindow = jest.fn();
