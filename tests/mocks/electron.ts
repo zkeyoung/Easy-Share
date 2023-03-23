@@ -101,40 +101,37 @@ function CreateWindowStub() {
   };
 }
 
-const app = {
-  addRecentDocument: jest.fn(),
-  getName: jest.fn().mockReturnValue('Electron Fiddle'),
-  setName: jest.fn(),
-  setAppUserModelId: jest.fn(),
-  exit: jest.fn(),
-  hide: jest.fn(),
-  show: jest.fn(),
-  isDefaultProtocolClient: jest.fn().mockReturnValue(true),
-  setAsDefaultProtocolClient: jest.fn(),
-  isReady: jest.fn().mockReturnValue(true),
-  isInApplicationsFolder: jest.fn().mockReturnValue(true),
-  moveToApplicationsFolder: jest.fn(),
-  getAppMetrics: jest.fn().mockReturnValue({ metrics: 123 }),
-  getGPUFeatureStatus: jest.fn(),
-  getJumpListSettings: jest.fn(() => ({
+class App extends EventEmitter {
+  public addRecentDocument = jest.fn();
+  public getName = jest.fn().mockReturnValue('Electron Fiddle');
+  public setName = jest.fn();
+  public setAppUserModelId = jest.fn();
+  public exit = jest.fn();
+  public hide = jest.fn();
+  public show = jest.fn();
+  public isDefaultProtocolClient = jest.fn().mockReturnValue(true);
+  public setAsDefaultProtocolClient = jest.fn();
+  public isReady = jest.fn().mockReturnValue(true);
+  public isInApplicationsFolder = jest.fn().mockReturnValue(true);
+  public moveToApplicationsFolder = jest.fn();
+  public getAppMetrics = jest.fn().mockReturnValue({ metrics: 123 });
+  public getGPUFeatureStatus = jest.fn();
+  public getJumpListSettings = jest.fn(() => ({
     removedItems: [],
-  })),
-  getLoginItemSettings: jest.fn(),
-  getPath: jest.fn((name: string) => {
+  }));
+  public getLoginItemSettings = jest.fn();
+  public getPath = jest.fn((name: string) => {
     if (name === 'appData') return '/easy-share';
     return '/test-path';
-  }),
-  focus: jest.fn(),
-  quit: jest.fn(),
-  relaunch: jest.fn(),
-  setJumpList: jest.fn(),
-  requestSingleInstanceLock: jest.fn(),
-  on: jest.fn(),
-  off: jest.fn(),
-  once: jest.fn(),
-  whenReady: () => Promise.resolve(),
-  removeAllListeners: jest.fn(),
-};
+  });
+  public focus = jest.fn();
+  public quit = jest.fn();
+  public relaunch = jest.fn();
+  public setJumpList = jest.fn();
+  public requestSingleInstanceLock = jest.fn();
+  public whenReady = () => Promise.resolve();
+  public removeAllListeners = jest.fn();
+}
 
 const mainWindowStub = CreateWindowStub();
 const focusedWindowStub = CreateWindowStub();
@@ -161,7 +158,7 @@ const systemPreferences = {
 };
 
 const electronMock = {
-  app,
+  app: new App(),
   autoUpdater,
   BrowserWindow: BrowserWindowMock,
   clipboard: {
@@ -174,6 +171,7 @@ const electronMock = {
     start: jest.fn(),
   },
   dialog: {
+    showErrorBox: jest.fn(),
     showOpenDialog: jest.fn().mockResolvedValue({}),
     showOpenDialogSync: jest.fn().mockReturnValue(['path']),
     showMessageBox: jest.fn().mockResolvedValue({}),
