@@ -13,14 +13,16 @@ function randomString(len: number) {
 
 function getServerAddress() {
   const interfaces = os.networkInterfaces();
-  const addresses = [];
+  const addresses: string[] = [];
   for (const identity in interfaces) {
     const networks = interfaces[identity];
-    networks.forEach(network => {
-      if (network.family === 'IPv4' && !network.internal) {
-        addresses.push(network.address);
-      }
-    });
+    if (networks) {
+      networks.forEach(network => {
+        if (network.family === 'IPv4' && !network.internal) {
+          addresses.push(network.address);
+        }
+      });
+    }
   }
   return addresses;
 }

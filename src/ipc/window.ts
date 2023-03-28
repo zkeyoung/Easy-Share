@@ -2,7 +2,9 @@ import { getWindow } from '../window';
 
 function focusWebView() {
   const window = getWindow();
-  window.focusOnWebView();
+  if (window) {
+    window.focusOnWebView();
+  }
 }
 
 export {

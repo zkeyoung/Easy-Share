@@ -34,7 +34,7 @@ async function readSettings() {
   } catch (err) {
     if (err.code !== 'ENOENT') throw err;
   } finally {
-    await fileHandler?.close();
+    await fileHandler!?.close();
   }
 }
 

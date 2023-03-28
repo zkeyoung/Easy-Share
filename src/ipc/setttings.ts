@@ -11,10 +11,10 @@ async function getSettings() {
   return { code: 0, msg: 'success', data: settings };
 }
 
-async function putSettings(settings?: Settings) {
+async function putSettings(settings: Settings) {
   await fs.writeFile(settingsFilePath, JSON.stringify(settings));
   cache.set(CacheKey.SETTINGS, settings);
-  let server: Server = cache.get(CacheKey.HTTP_SERVER);
+  let server: Server | null = cache.get(CacheKey.HTTP_SERVER);
   if (server) server.close();
   server = await httpServer.start(settings);
   if (!server) {
